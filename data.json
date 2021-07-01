@@ -35,6 +35,84 @@
       "email": "jjohnson@email.com",
       "age": 46,
       "id": "1oTUDmO"
+    },
+    {
+      "name": "Christian Berry",
+      "email": "cb@email.com",
+      "age": 20,
+      "id": "7"
+    }
+  ],
+  "chats": [
+    {
+      "to": "2",
+      "from": "1",
+      "content": "Ayo",
+      "createdAt": "07/01/2021/11:05",
+      "id": 1
+    },
+    {
+      "to": "2",
+      "from": "3",
+      "content": "Hey",
+      "createdAt": "07/01/2021/11:06",
+      "id": 2
+    },
+    {
+      "to": "1",
+      "from": "3",
+      "content": "Bruh",
+      "createdAt": "07/01/2021/11:06",
+      "id": 4
+    },
+    {
+      "to": "1",
+      "from": "3",
+      "content": "Hot",
+      "createdAt": "07/02/2021/11:06",
+      "id": 7
+    },
+    {
+      "to": "1",
+      "from": "3",
+      "content": "B",
+      "createdAt": "06/30/2021/11:06",
+      "id": 5
+    },
+    {
+      "to": "1",
+      "from": "3",
+      "content": "Y",
+      "createdAt": "07/02/2021/11:04",
+      "id": 70
+    },
+    {
+      "to": "1",
+      "from": "3",
+      "content": "4",
+      "createdAt": "07/02/2021/11:09",
+      "id": 20
+    },
+    {
+      "to": "1",
+      "from": "3",
+      "content": "Beter",
+      "createdAt": "07/02/2021/11:08",
+      "id": 10
+    },
+    {
+      "to": "1",
+      "from": "3",
+      "content": "Great Day",
+      "createdAt": "07/01/2021/11:59",
+      "id": 8
+    },
+    {
+      "to": "3",
+      "from": "1",
+      "content": "Green Day",
+      "createdAt": "07/01/2021/11:30",
+      "id": 71
     }
   ]
 }

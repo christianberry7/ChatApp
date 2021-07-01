@@ -9,15 +9,38 @@ const {
   GraphQLNonNull,
 } = require("graphql");
 
-// // Hardcoded data
-// const customers = [
-//     { id:'1', name:'Jon Bellion', email:'jbellion@email.com', age:30  },
-//     { id:'2', name:'John Mayer', email:'jcm@email.com', age:43  },
-//     { id:'3', name:'Jonathon Ng', email:'eden@email.com', age:25  },
-//     { id:'4', name:'Justin Bieber', email:'jb@email.com', age:27  }
-// ]
-
 //Customer Type
+function order(chats) {
+  return chats.sort((a, b) => {
+    const lista = getList(a.createdAt);
+    const listb = getList(b.createdAt);
+    console.log(lista);
+    console.log(listb);
+    for (let i = 0; i < listb.length; i++) {
+      if (i === listb.length - 1) {
+        console.log(listb[i] + " vs. " + lista[i]);
+        return lista[i] - listb[i];
+      } else {
+        if (lista[i] - listb[i] !== 0) {
+          console.log(listb[i] + " vs. " + lista[i]);
+          return lista[i] - listb[i];
+        }
+      }
+    }
+  });
+}
+
+function getList(chats) {
+  chats = chats.split("/");
+  const times = chats[3].split(":");
+  return [
+    parseInt(chats[2]),
+    parseInt(chats[0]),
+    parseInt(chats[1]),
+    parseInt(times[0]),
+    parseInt(times[1]),
+  ];
+}
 const CustomerType = new GraphQLObjectType({
   name: "Customer",
   fields: () => ({
@@ -25,6 +48,18 @@ const CustomerType = new GraphQLObjectType({
     name: { type: GraphQLString },
     email: { type: GraphQLString },
     age: { type: GraphQLInt },
+  }),
+});
+
+//Chat Type
+const ChatType = new GraphQLObjectType({
+  name: "Chat",
+  fields: () => ({
+    id: { type: GraphQLString },
+    to: { type: GraphQLString },
+    from: { type: GraphQLString },
+    content: { type: GraphQLString },
+    createdAt: { type: GraphQLString },
   }),
 });
 
@@ -54,6 +89,83 @@ const RootQuery = new GraphQLObjectType({
         return axios
           .get("http://localhost:3000/customers")
           .then((res) => res.data);
+      },
+    },
+    chat: {
+      type: ChatType,
+      args: {
+        id: { type: GraphQLString },
+      },
+      resolve(parentValue, args) {
+        return axios
+          .get("http://localhost:3000/chats/" + args.id)
+          .then((res) => res.data);
+      },
+    },
+    chats: {
+      type: new GraphQLList(ChatType),
+      resolve(parentValue, args) {
+        return axios.get("http://localhost:3000/chats").then((res) => res.data);
+      },
+    },
+    myChats: {
+      type: new GraphQLList(ChatType),
+      args: {
+        to: { type: GraphQLString },
+      },
+      resolve(parentValue, args) {
+        return axios
+          .get("http://localhost:3000/chats")
+          .then((res) => res.data.filter((chat) => chat.to === args.to));
+      },
+    },
+    mySentChats: {
+      type: new GraphQLList(ChatType),
+      args: {
+        from: { type: GraphQLString },
+      },
+      resolve(parentValue, args) {
+        return axios
+          .get("http://localhost:3000/chats")
+          .then((res) => res.data.filter((chat) => chat.from === args.from));
+      },
+    },
+    myDMs: {
+      type: new GraphQLList(ChatType),
+      args: {
+        to: { type: GraphQLString },
+        from: { type: GraphQLString },
+      },
+      resolve(parentValue, args) {
+        return axios
+          .get("http://localhost:3000/chats")
+          .then((res) =>
+            order(
+              res.data.filter(
+                (chat) => chat.from === args.from && chat.to === args.to
+              )
+            )
+          );
+      },
+    },
+    myConvos: {
+      type: new GraphQLList(ChatType),
+      args: {
+        a: { type: GraphQLString },
+        b: { type: GraphQLString },
+      },
+      resolve(parentValue, args) {
+        return axios
+          .get("http://localhost:3000/chats")
+          .then((res) =>
+            order(
+              res.data.filter(
+                (chat) =>
+                  (chat.from === args.a && chat.to === args.b) ||
+                  (chat.from === args.b && chat.to === args.a)
+              )
+            )
+          );
       },
     },
   },
@@ -104,6 +216,44 @@ const mutation = new GraphQLObjectType({
         return axios
           .patch("http://localhost:3000/customers/" + args.id, args)
           .then((res) => res.data);
+      },
+    },
+    addChat: {
+      type: ChatType,
+      args: {
+        to: { type: new GraphQLNonNull(GraphQLString) },
+        from: { type: new GraphQLNonNull(GraphQLString) },
+        content: { type: new GraphQLNonNull(GraphQLString) },
+      },
+      resolve(parentValue, args) {
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, "0");
+        var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+        var yyyy = today.getFullYear();
+        var hours = String(today.getHours()).padStart(2, "0");
+        var minutes = String(today.getMinutes()).padStart(2, "0");
+
+        today = mm + "/" + dd + "/" + yyyy + "/" + hours + ":" + minutes;
+        return axios
+          .post("http://localhost:3000/chats", {
+            // so we make this a return because otherwise we wouldn't be able to get back the id/email etc. of the thing we just created
+            to: args.to,
+            from: args.from,
+            content: args.content,
+            createdAt: today,
+          })
+          .then((res) => res.data);
+      },
+      deleteChat: {
+        type: ChatType,
+        args: {
+          id: { type: new GraphQLNonNull(GraphQLString) },
+        },
+        resolve(parentValue, args) {
+          return axios
+            .delete("http://localhost:3000/chats/" + args.id)
+            .then((res) => res.data);
+        },
       },
     },
   },
