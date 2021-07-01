@@ -14,15 +14,11 @@ function order(chats) {
   return chats.sort((a, b) => {
     const lista = getList(a.createdAt);
     const listb = getList(b.createdAt);
-    console.log(lista);
-    console.log(listb);
     for (let i = 0; i < listb.length; i++) {
       if (i === listb.length - 1) {
-        console.log(listb[i] + " vs. " + lista[i]);
         return lista[i] - listb[i];
       } else {
         if (lista[i] - listb[i] !== 0) {
-          console.log(listb[i] + " vs. " + lista[i]);
           return lista[i] - listb[i];
         }
       }
