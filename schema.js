@@ -1,35 +1,30 @@
+const axios = require("axios"); // this is used for getting our json data
 const {
+  // this is object destructuring
   GraphQLObjectType,
-  GraphQLInt,
   GraphQLString,
-  GraphQLBoolean,
-  GraphQLList,
+  GraphQLInt,
   GraphQLSchema,
+  GraphQLList,
+  GraphQLNonNull,
 } = require("graphql");
 
-const axios = require("axios");
-// Launch type
-const LaunchType = new GraphQLObjectType({
-  // put in an object that has some key value pairs
-  name: "Launch",
-  fields: () => ({
-    flight_number: { type: GraphQLInt },
-    mission_name: { type: GraphQLString },
-    launch_year: { type: GraphQLString },
-    launch_date_local: { type: GraphQLString },
-    launch_success: { type: GraphQLBoolean },
-    rocket: { type: RocketType },
-  }),
-});
+// // Hardcoded data
+// const customers = [
+//     { id:'1', name:'Jon Bellion', email:'jbellion@email.com', age:30  },
+//     { id:'2', name:'John Mayer', email:'jcm@email.com', age:43  },
+//     { id:'3', name:'Jonathon Ng', email:'eden@email.com', age:25  },
+//     { id:'4', name:'Justin Bieber', email:'jb@email.com', age:27  }
+// ]
 
-// RocketType
-const RocketType = new GraphQLObjectType({
-  // put in an object that has some key value pairs
-  name: "Rocket",
+//Customer Type
+const CustomerType = new GraphQLObjectType({
+  name: "Customer",
   fields: () => ({
-    rocket_id: { type: GraphQLString },
-    rocket_name: { type: GraphQLString },
-    rocket_type: { type: GraphQLString },
+    id: { type: GraphQLString },
+    name: { type: GraphQLString },
+    email: { type: GraphQLString },
+    age: { type: GraphQLInt },
   }),
 });
 
@@ -37,51 +32,83 @@ const RocketType = new GraphQLObjectType({
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
   fields: {
-    launches: {
-      type: new GraphQLList(LaunchType),
-      resolve(parent, args) {
-        // this is where we actually get our data (third party API in this case)
-        return axios
-          .get("https://api.spacexdata.com/v3/launches")
-          .then((res) => res.data);
-      },
-    },
-    launch: {
-      type: LaunchType,
-      args: {
-        flight_number: { type: GraphQLInt },
-      },
-      resolve(parent, args) {
-        // this is where we actually get our data (third party API in this case)
-        return axios
-          .get(`https://api.spacexdata.com/v3/launches/${args.flight_number}`)
-          .then((res) => res.data);
-      },
-    },
-    rocket: {
-      type: RocketType,
+    customer: {
+      type: CustomerType,
       args: {
         id: { type: GraphQLString },
       },
-      resolve(parent, args) {
-        // this is where we actually get our data (third party API in this case)
+      resolve(parentValue, args) {
         return axios
-          .get(`https://api.spacexdata.com/v3/rockets/${args.id}`)
+          .get("http://localhost:3000/customers/" + args.id)
           .then((res) => res.data);
+        // for(let i = 0; i < customers.length;i++){ this was the original way with the hardcoded data
+        //     if (customers[i].id === args.id){
+        //         return customers[i];
+        //     }
+        // }
       },
     },
-    rockets: {
-      type: new GraphQLList(RocketType),
-      resolve(parent, args) {
-        // this is where we actually get our data (third party API in this case)
+    customers: {
+      type: new GraphQLList(CustomerType),
+      resolve(parentValue, args) {
         return axios
-          .get(`https://api.spacexdata.com/v3/rockets`)
+          .get("http://localhost:3000/customers")
           .then((res) => res.data);
       },
     },
   },
 });
 
+//mutation
+const mutation = new GraphQLObjectType({
+  name: "Mutation",
+  fields: {
+    addCustomer: {
+      type: CustomerType,
+      args: {
+        name: { type: new GraphQLNonNull(GraphQLString) },
+        email: { type: new GraphQLNonNull(GraphQLString) },
+        age: { type: new GraphQLNonNull(GraphQLInt) },
+      },
+      resolve(parentValue, args) {
+        return axios
+          .post("http://localhost:3000/customers", {
+            // so we make this a return because otherwise we wouldn't be able to get back the id/email etc. of the thing we just created
+            name: args.name,
+            email: args.email,
+            age: args.age,
+          })
+          .then((res) => res.data);
+      },
+    },
+    deleteCustomer: {
+      type: CustomerType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLString) },
+      },
+      resolve(parentValue, args) {
+        return axios
+          .delete("http://localhost:3000/customers/" + args.id)
+          .then((res) => res.data);
+      },
+    },
+    editCustomer: {
+      type: CustomerType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLString) },
+        name: { type: GraphQLString },
+        email: { type: GraphQLString },
+        age: { type: GraphQLInt },
+      },
+      resolve(parentValue, args) {
+        return axios
+          .patch("http://localhost:3000/customers/" + args.id, args)
+          .then((res) => res.data);
+      },
+    },
+  },
+});
 module.exports = new GraphQLSchema({
   query: RootQuery,
+  mutation,
 });
