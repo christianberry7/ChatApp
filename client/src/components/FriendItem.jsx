@@ -11,6 +11,7 @@ const FriendItem = ({ friend: { id, email, name, age } }) => {
           <p>Age:{age}</p>
         </div>
         <div className="col-md-3">
+          <br></br>
           <Link to={`/${id}`} className="btn btn-primary">
             Chat with friend!
           </Link>

@@ -16,6 +16,7 @@ function App() {
       <BrowserRouter>
         <div className="container">
           <h1 className="title">ChatMe!</h1>
+          <hr />
           <Route exact path="/" component={Friends} />
           <Route exact path="/:id" component={DM} />
         </div>

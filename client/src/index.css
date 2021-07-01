@@ -16,6 +16,7 @@ code {
   text-align: center;
   font-size: 70px;
   margin-top: 50px;
+  margin-bottom: 30px;
 }
 
 .mychat {
@@ -26,4 +27,8 @@ code {
 .theirchat {
   text-align: left;
   padding: 5px;
+}
+
+.noMessages {
+  margin: 40px;
 }

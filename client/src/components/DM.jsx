@@ -35,7 +35,7 @@ function DM(props) {
           </div>
         ))
       ) : (
-        <h1>No messages!</h1>
+        <h1 className="noMessages">No messages!</h1>
       )}
       <hr />
       <Link to={`/`} className="btn btn-secondary">
