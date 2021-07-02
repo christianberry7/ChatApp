@@ -1,10 +1,9 @@
 import React from "react";
-import { useQuery, gql } from "@apollo/client";
-import { Link } from "react-router-dom";
+import { useMutation, gql } from "@apollo/client";
 
-const FRIEND_QUERY = gql`
-  query FriendQuery($a: String!, $b: String!) {
-    myConvos(a: $a, b: $b) {
+const ADD_CHAT = gql`
+  mutation AddChat($to: String!, $from: String!, $content: String!) {
+    addChat(to: $to, from: $from, content: $content) {
       id
       to
       from
@@ -16,31 +15,40 @@ const FRIEND_QUERY = gql`
 
 function DM(props) {
   let { id } = props.match.params;
-  const { loading, error, data } = useQuery(FRIEND_QUERY, {
-    variables: { a: id, b: "3" }, // later b will be me specifically
-  });
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>{error.message} Error :(</p>;
-  console.log(data);
+  // const { loading, error, data } = useQuery(FRIEND_QUERY, {
+  //   variables: { a: id, b: "3" }, // later b will be me specifically
+  // });
+  const [addchat] = useMutation(ADD_CHAT);
+  // if (loading) return <p>Loading...</p>;
+  // if (error) return <p>{error.message} Error :(</p>;
+  let input;
+  // console.log(data);
   return (
     <React.Fragment>
-      {data.myConvos.length ? (
-        data.myConvos.map((chat) => (
-          <div
-            key={chat.id}
-            className={chat.from === id ? "theirchat" : "mychat"}
-          >
-            <h3>{chat.content}</h3>
-            <h4>{chat.createdAt}</h4>
-          </div>
-        ))
-      ) : (
-        <h1 className="noMessages">No messages!</h1>
-      )}
-      <hr />
-      <Link to={`/`} className="btn btn-secondary">
-        Back
-      </Link>
+      <div>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (input.value === "") {
+              return;
+            }
+            addchat({
+              variables: { to: id, from: "3", content: input.value },
+            }).then((result) => props.post(result));
+            input.value = "";
+          }}
+        >
+          <input
+            className="form-control"
+            ref={(node) => {
+              input = node;
+            }}
+          />
+          <button className="btn btn-primary" type="submit">
+            SEND MESSAGE
+          </button>
+        </form>
+      </div>
     </React.Fragment>
   );
 }

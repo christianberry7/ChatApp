@@ -68,37 +68,9 @@
     {
       "to": "1",
       "from": "3",
-      "content": "Hot",
-      "createdAt": "07/02/2021/11:06",
-      "id": 7
-    },
-    {
-      "to": "1",
-      "from": "3",
       "content": "B",
       "createdAt": "06/30/2021/11:06",
       "id": 5
-    },
-    {
-      "to": "1",
-      "from": "3",
-      "content": "Y",
-      "createdAt": "07/02/2021/11:04",
-      "id": 70
-    },
-    {
-      "to": "1",
-      "from": "3",
-      "content": "4",
-      "createdAt": "07/02/2021/11:09",
-      "id": 20
-    },
-    {
-      "to": "1",
-      "from": "3",
-      "content": "Beter",
-      "createdAt": "07/02/2021/11:08",
-      "id": 10
     },
     {
       "to": "1",
@@ -113,6 +85,83 @@
       "content": "Green Day",
       "createdAt": "07/01/2021/11:30",
       "id": 71
+    },
+    {
+      "to": "1",
+      "from": "3",
+      "content": "Hey there",
+      "createdAt": "07/01/2021/14:14",
+      "id": 72
+    },
+    {
+      "to": "1",
+      "from": "3",
+      "content": "yo",
+      "createdAt": "07/01/2021/14:15",
+      "id": 73
+    },
+    {
+      "to": "1",
+      "from": "3",
+      "content": "how's it goung",
+      "createdAt": "07/01/2021/14:16",
+      "id": 74
+    },
+    {
+      "to": "1",
+      "from": "3",
+      "content": "bum",
+      "createdAt": "07/01/2021/14:19",
+      "id": 75
+    },
+    {
+      "to": "5",
+      "from": "3",
+      "content": "Hi Jeremy",
+      "createdAt": "07/01/2021/16:38",
+      "id": 76
+    },
+    {
+      "to": "1oTUDmO",
+      "from": "3",
+      "content": "hi jack",
+      "createdAt": "07/01/2021/17:14",
+      "id": 77
+    },
+    {
+      "to": "1oTUDmO",
+      "from": "3",
+      "content": "how's it going man",
+      "createdAt": "07/01/2021/17:14",
+      "id": 78
+    },
+    {
+      "to": "7",
+      "from": "3",
+      "content": "hey cb",
+      "createdAt": "07/01/2021/17:16",
+      "id": 79
+    },
+    {
+      "to": "7",
+      "from": "3",
+      "content": "yeehaw",
+      "createdAt": "07/01/2021/17:16",
+      "id": 80
+    },
+    {
+      "to": "7",
+      "from": "3",
+      "content": "need websockets asap",
+      "createdAt": "07/01/2021/17:17",
+      "id": 81
+    },
+    {
+      "to": "7",
+      "from": "3",
+      "content": "to keep the connection open",
+      "createdAt": "07/01/2021/17:17",
+      "id": 82
     }
   ]
 }

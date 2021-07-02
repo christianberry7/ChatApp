@@ -2,8 +2,7 @@ import "./App.css";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { BrowserRouter, Route } from "react-router-dom";
 import Friends from "./components/Friends";
-import DM from "./components/DM";
-//import DM from "./components/DM";
+import ChatItem from "./components/ChatItem";
 
 const client = new ApolloClient({
   uri: "http://localhost:4000/graphql",
@@ -18,7 +17,7 @@ function App() {
           <h1 className="title">ChatMe!</h1>
           <hr />
           <Route exact path="/" component={Friends} />
-          <Route exact path="/:id" component={DM} />
+          <Route exact path="/:id" component={ChatItem} />
         </div>
       </BrowserRouter>
     </ApolloProvider>
