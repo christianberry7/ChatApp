@@ -9,6 +9,7 @@ const LOGIN_QUERY = gql`
       password
       id
       name
+      friends
     }
   }
 `;
@@ -53,8 +54,10 @@ export default function Login({ setToken }) {
       });
       const id = data.customers[valid].id;
       const name = data.customers[valid].name;
+      const friends = data.customers[valid].friends;
       sessionStorage.setItem("id", id);
       sessionStorage.setItem("name", name);
+      sessionStorage.setItem("friends", friends);
       setToken(token);
     } else {
       window.alert("Invalid login credentials!");

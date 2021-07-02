@@ -45,6 +45,7 @@ const CustomerType = new GraphQLObjectType({
     email: { type: GraphQLString },
     age: { type: GraphQLInt },
     password: { type: GraphQLString },
+    friends: { type: new GraphQLList(GraphQLString) },
   }),
 });
 
@@ -177,6 +178,7 @@ const mutation = new GraphQLObjectType({
       args: {
         name: { type: new GraphQLNonNull(GraphQLString) },
         email: { type: new GraphQLNonNull(GraphQLString) },
+        password: { type: new GraphQLNonNull(GraphQLString) },
         age: { type: new GraphQLNonNull(GraphQLInt) },
       },
       resolve(parentValue, args) {
@@ -185,7 +187,9 @@ const mutation = new GraphQLObjectType({
             // so we make this a return because otherwise we wouldn't be able to get back the id/email etc. of the thing we just created
             name: args.name,
             email: args.email,
+            password: args.password,
             age: args.age,
+            friends: [],
           })
           .then((res) => res.data);
       },
@@ -207,7 +211,9 @@ const mutation = new GraphQLObjectType({
         id: { type: new GraphQLNonNull(GraphQLString) },
         name: { type: GraphQLString },
         email: { type: GraphQLString },
+        password: { type: new GraphQLNonNull(GraphQLString) },
         age: { type: GraphQLInt },
+        friends: { type: new GraphQLList(GraphQLString) },
       },
       resolve(parentValue, args) {
         return axios
@@ -223,6 +229,20 @@ const mutation = new GraphQLObjectType({
       resolve(parentValue, args) {
         return axios
           .delete("http://localhost:3000/chats/" + args.id)
+          .then((res) => res.data);
+      },
+    },
+    addFriendship: {
+      type: CustomerType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLString) },
+        friends: { type: new GraphQLNonNull(new GraphQLList(GraphQLString)) },
+      },
+      resolve(parentValue, args) {
+        return axios
+          .patch("http://localhost:3000/customers/" + args.id, {
+            friends: args.friends,
+          })
           .then((res) => res.data);
       },
     },
