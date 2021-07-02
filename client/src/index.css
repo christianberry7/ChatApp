@@ -32,3 +32,23 @@ code {
 .noMessages {
   margin: 40px;
 }
+
+.deleteButton {
+  height: 25px;
+}
+
+.del {
+  position: relative;
+  top: -75%;
+}
+
+.login-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login {
+  font-size: 60px;
+  margin-top: 50px;
+}

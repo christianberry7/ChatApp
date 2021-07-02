@@ -44,6 +44,7 @@ const CustomerType = new GraphQLObjectType({
     name: { type: GraphQLString },
     email: { type: GraphQLString },
     age: { type: GraphQLInt },
+    password: { type: GraphQLString },
   }),
 });
 
@@ -214,6 +215,17 @@ const mutation = new GraphQLObjectType({
           .then((res) => res.data);
       },
     },
+    deleteChat: {
+      type: ChatType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLString) },
+      },
+      resolve(parentValue, args) {
+        return axios
+          .delete("http://localhost:3000/chats/" + args.id)
+          .then((res) => res.data);
+      },
+    },
     addChat: {
       type: ChatType,
       args: {
@@ -239,17 +251,6 @@ const mutation = new GraphQLObjectType({
             createdAt: today,
           })
           .then((res) => res.data);
-      },
-      deleteChat: {
-        type: ChatType,
-        args: {
-          id: { type: new GraphQLNonNull(GraphQLString) },
-        },
-        resolve(parentValue, args) {
-          return axios
-            .delete("http://localhost:3000/chats/" + args.id)
-            .then((res) => res.data);
-        },
       },
     },
   },

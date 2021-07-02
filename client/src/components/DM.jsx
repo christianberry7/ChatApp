@@ -33,8 +33,12 @@ function DM(props) {
               return;
             }
             addchat({
-              variables: { to: id, from: "3", content: input.value },
-            }).then((result) => props.post(result));
+              variables: {
+                to: id,
+                from: sessionStorage.getItem("id"),
+                content: input.value,
+              },
+            });
             input.value = "";
           }}
         >

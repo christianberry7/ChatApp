@@ -12,7 +12,7 @@ const FriendItem = ({ friend: { id, email, name, age } }) => {
         </div>
         <div className="col-md-3">
           <br></br>
-          <Link to={`/${id}`} className="btn btn-primary">
+          <Link to={`/friends/${id}`} className="btn btn-primary">
             Chat with friend!
           </Link>
         </div>

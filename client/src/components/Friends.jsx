@@ -13,18 +13,24 @@ const FRIENDS_QUERY = gql`
 `;
 
 function Friends() {
+  const myid = sessionStorage.getItem("id");
+  const myname = sessionStorage.getItem("name");
   const { loading, error, data } = useQuery(FRIENDS_QUERY);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error.message} Error :(</p>;
-  console.log(data);
   return (
     <React.Fragment>
-      <h2 className="mb-5 mt-5">Friends</h2>
+      <h2 className="mb-5 mt-5">Hi, {myname}!</h2>
+      <h2 className="mb-5 mt-5">Friends:</h2>
       <hr></hr>
-      {data.customers.map((friend) => (
-        <FriendItem key={friend.id} friend={friend} />
-      ))}
+      {data.customers.map((friend) =>
+        friend.id !== myid ? (
+          <FriendItem key={friend.id} friend={friend} />
+        ) : (
+          <div key={friend.id} />
+        )
+      )}
     </React.Fragment>
   );
 }
