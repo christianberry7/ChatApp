@@ -77,7 +77,9 @@
       "id": "1oTUDmO",
       "password": "kj",
       "friends": [
-        "7"
+        "7",
+        "1",
+        "2"
       ]
     },
     {
@@ -359,6 +361,20 @@
       "content": "hi",
       "createdAt": "07/02/2021/15:28",
       "id": 107
+    },
+    {
+      "to": "7",
+      "from": "1oTUDmO",
+      "content": "hey",
+      "createdAt": "07/02/2021/17:23",
+      "id": 108
+    },
+    {
+      "to": "7",
+      "from": "1oTUDmO",
+      "content": "wassup",
+      "createdAt": "07/02/2021/17:23",
+      "id": 109
     }
   ]
 }

@@ -1,7 +1,6 @@
 import React from "react";
 import { useQuery, gql } from "@apollo/client";
-import FriendItem from "./FriendItem";
-import { Link } from "react-router-dom";
+import AddFriendItem from "./AddFriendItem";
 const FRIENDS_QUERY = gql`
   query CustomersQuery {
     customers {
@@ -14,7 +13,7 @@ const FRIENDS_QUERY = gql`
   }
 `;
 
-function Friends() {
+function AddFriends() {
   const myid = sessionStorage.getItem("id");
   const myname = sessionStorage.getItem("name");
   const { loading, error, data } = useQuery(FRIENDS_QUERY);
@@ -30,25 +29,25 @@ function Friends() {
   sessionStorage.setItem("friends", myfriends);
   return (
     <React.Fragment>
-      <h2 className="mb-5 mt-5">Hi, {myname}!</h2>
-      <Link to={`/friends/add`} className="btn btn-info">
-        Add Friends!
-      </Link>
-      <h2 className="mb-5 mt-5">Friends:</h2>
-      <hr></hr>
+      <h2 className="mb-5 mt-5">Hi, {myname}! Add Friends Here!</h2>
       {data.customers.map((friend) =>
         friend.id !== myid ? (
-          myfriends.includes(friend.id) ? (
-            <FriendItem key={friend.id} friend={friend} />
+          !myfriends.includes(friend.id) ? (
+            <AddFriendItem key={friend.id} friend={friend} added={false} />
           ) : (
-            <div key={friend.id} />
+            <div key={friend.id}>
+              <AddFriendItem key={friend.id} friend={friend} added={true} />
+            </div>
           )
         ) : (
-          <div key={friend.id} />
+          <div key={friend.id}></div>
         )
       )}
+      <a href="/friends" className="btn btn-secondary">
+        Back
+      </a>
     </React.Fragment>
   );
 }
 
-export default Friends;
+export default AddFriends;

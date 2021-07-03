@@ -37,7 +37,6 @@ export default function Login({ setToken }) {
         data.customers[i].email === username &&
         data.customers[i].password === password
       ) {
-        console.log("valid");
         return i;
       }
     }
