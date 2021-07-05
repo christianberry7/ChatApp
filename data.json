@@ -11,7 +11,8 @@
         "2",
         "3",
         "4",
-        "5"
+        "5",
+        "oQx5Fw0"
       ]
     },
     {
@@ -26,7 +27,8 @@
         "3",
         "4",
         "5",
-        "1oTUDmO"
+        "1oTUDmO",
+        "oQx5Fw0"
       ]
     },
     {
@@ -104,7 +106,9 @@
       "password": "pizza",
       "age": 20,
       "friends": [
-        "7"
+        "7",
+        "2",
+        "1"
       ],
       "id": "oQx5Fw0"
     }
@@ -375,6 +379,41 @@
       "content": "wassup",
       "createdAt": "07/02/2021/17:23",
       "id": 109
+    },
+    {
+      "to": "oQx5Fw0",
+      "from": "2",
+      "content": "hey kent",
+      "createdAt": "07/05/2021/11:32",
+      "id": 110
+    },
+    {
+      "to": "2",
+      "from": "oQx5Fw0",
+      "content": "what's good dude",
+      "createdAt": "07/05/2021/11:32",
+      "id": 111
+    },
+    {
+      "to": "1",
+      "from": "oQx5Fw0",
+      "content": "hey jon",
+      "createdAt": "07/05/2021/11:35",
+      "id": 112
+    },
+    {
+      "to": "oQx5Fw0",
+      "from": "1",
+      "content": "hi, thanks for adding me bro",
+      "createdAt": "07/05/2021/11:35",
+      "id": 113
+    },
+    {
+      "to": "1",
+      "from": "oQx5Fw0",
+      "content": "of course man",
+      "createdAt": "07/05/2021/11:35",
+      "id": 114
     }
   ],
   "requests": []

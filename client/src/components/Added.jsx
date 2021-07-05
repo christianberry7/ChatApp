@@ -65,6 +65,7 @@ function Added(props) {
                 from: myid,
               },
             });
+            window.alert("Request sent!");
           } else {
             console.log("deleting request with id of " + option);
             deleterequest({
@@ -72,14 +73,20 @@ function Added(props) {
                 id: parseInt(option),
               },
             });
+            window.alert("Request Accepted!");
           }
-          window.alert("Request sent!");
           window.location.replace("/friends/add");
         }}
       >
-        <button className="btn btn-success" type="submit">
-          SEND REQUEST
-        </button>
+        {option === "addNew" ? (
+          <button className="btn btn-success" type="submit">
+            SEND REQUEST
+          </button>
+        ) : (
+          <button className="btn btn-warning" type="submit">
+            ACCEPT REQUEST
+          </button>
+        )}
       </form>
       <a href="/friends/add" className="btn btn-secondary">
         Back
