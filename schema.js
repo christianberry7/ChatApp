@@ -71,6 +71,17 @@ const RequestType = new GraphQLObjectType({
   }),
 });
 
+//Unread Message Type
+const UnreadType = new GraphQLObjectType({
+  name: "Unread",
+  fields: () => ({
+    id: { type: GraphQLInt },
+    to: { type: GraphQLString },
+    from: { type: GraphQLString },
+    count: { type: GraphQLInt },
+  }),
+});
+
 // Root Query
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
@@ -240,6 +251,31 @@ const RootQuery = new GraphQLObjectType({
           );
       },
     },
+    unreads: {
+      type: new GraphQLList(UnreadType),
+      resolve(parentValue, args) {
+        return axios
+          .get("http://localhost:3000/unreads")
+          .then((res) => res.data);
+      },
+    },
+    myUnreads: {
+      type: UnreadType,
+      args: {
+        to: { type: GraphQLString },
+        from: { type: GraphQLString },
+      },
+      resolve(parentValue, args) {
+        return axios
+          .get("http://localhost:3000/unreads")
+          .then(
+            (res) =>
+              res.data.filter(
+                (unread) => unread.to === args.to && unread.from === args.from
+              )[0]
+          );
+      },
+    },
   },
 });
 
@@ -356,7 +392,6 @@ const mutation = new GraphQLObjectType({
       resolve(parentValue, args) {
         return axios
           .post("http://localhost:3000/requests", {
-            // so we make this a return because otherwise we wouldn't be able to get back the id/email etc. of the thing we just created
             to: args.to,
             from: args.from,
           })
@@ -371,6 +406,17 @@ const mutation = new GraphQLObjectType({
       resolve(parentValue, args) {
         return axios
           .delete("http://localhost:3000/requests/" + args.id)
+          .then((res) => res.data);
+      },
+    },
+    deleteUnread: {
+      type: UnreadType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLString) },
+      },
+      resolve(parentValue, args) {
+        return axios
+          .delete("http://localhost:3000/unreads/" + args.id)
           .then((res) => res.data);
       },
     },

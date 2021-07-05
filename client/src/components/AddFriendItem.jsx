@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { useQuery, gql } from "@apollo/client";
 
 const GET_REQUESTS = gql`
@@ -39,16 +38,16 @@ function AddFriendItem({ friend: { id, email, name, age }, added }) {
               <button className="btn btn-info disabled">Friend Added!</button>
             )
           ) : ourRequests !== null && ourRequests.to === myid ? (
-            <Link
-              to={`/friends/add/${id}_${ourRequests.id}`}
+            <a
+              href={`/friends/add/${id}_${ourRequests.id}`}
               className="btn btn-warning"
             >
               Add them back!
-            </Link>
+            </a>
           ) : (
-            <Link to={`/friends/add/${id}_addNew`} className="btn btn-success">
+            <a href={`/friends/add/${id}_addNew`} className="btn btn-success">
               Add friend!
-            </Link>
+            </a>
           )}
         </div>
       </div>
