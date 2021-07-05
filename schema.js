@@ -61,6 +61,16 @@ const ChatType = new GraphQLObjectType({
   }),
 });
 
+//Request Type
+const RequestType = new GraphQLObjectType({
+  name: "Request",
+  fields: () => ({
+    id: { type: GraphQLInt },
+    to: { type: GraphQLString },
+    from: { type: GraphQLString },
+  }),
+});
+
 // Root Query
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
@@ -163,6 +173,70 @@ const RootQuery = new GraphQLObjectType({
                   (chat.from === args.b && chat.to === args.a)
               )
             )
+          );
+      },
+    },
+    requests: {
+      type: new GraphQLList(RequestType),
+      resolve(parentValue, args) {
+        return axios
+          .get("http://localhost:3000/requests")
+          .then((res) => res.data);
+      },
+    },
+    myRequestsCount: {
+      type: GraphQLInt,
+      args: {
+        to: { type: GraphQLString },
+      },
+      resolve(parentValue, args) {
+        return axios
+          .get("http://localhost:3000/requests")
+          .then(
+            (res) => res.data.filter((chat) => request.to === args.to).length
+          );
+      },
+    },
+    mySentRequests: {
+      type: new GraphQLList(RequestType),
+      args: {
+        from: { type: GraphQLString },
+      },
+      resolve(parentValue, args) {
+        return axios
+          .get("http://localhost:3000/requests")
+          .then((res) =>
+            res.data.filter((request) => request.from === args.from)
+          );
+      },
+    },
+    myReceivedRequests: {
+      type: new GraphQLList(RequestType),
+      args: {
+        to: { type: GraphQLString },
+      },
+      resolve(parentValue, args) {
+        return axios
+          .get("http://localhost:3000/requests")
+          .then((res) => res.data.filter((request) => request.to === args.to));
+      },
+    },
+    ourRequests: {
+      type: RequestType,
+      args: {
+        a: { type: GraphQLString },
+        b: { type: GraphQLString },
+      },
+      resolve(parentValue, args) {
+        return axios
+          .get("http://localhost:3000/requests")
+          .then(
+            (res) =>
+              res.data.filter(
+                (request) =>
+                  (request.from === args.a && request.to === args.b) ||
+                  (request.from === args.b && request.to === args.a)
+              )[0]
           );
       },
     },
@@ -270,6 +344,33 @@ const mutation = new GraphQLObjectType({
             content: args.content,
             createdAt: today,
           })
+          .then((res) => res.data);
+      },
+    },
+    addRequest: {
+      type: RequestType,
+      args: {
+        to: { type: new GraphQLNonNull(GraphQLString) },
+        from: { type: new GraphQLNonNull(GraphQLString) },
+      },
+      resolve(parentValue, args) {
+        return axios
+          .post("http://localhost:3000/requests", {
+            // so we make this a return because otherwise we wouldn't be able to get back the id/email etc. of the thing we just created
+            to: args.to,
+            from: args.from,
+          })
+          .then((res) => res.data);
+      },
+    },
+    deleteRequest: {
+      type: RequestType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLInt) },
+      },
+      resolve(parentValue, args) {
+        return axios
+          .delete("http://localhost:3000/requests/" + args.id)
           .then((res) => res.data);
       },
     },
