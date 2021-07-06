@@ -34,19 +34,14 @@ async function grabUnreads(args) {
     const response = await axios.get("http://localhost:3000/unreads");
     //return response;
     const unreads = response.data;
-    console.log(unreads);
-    console.log(unreads[0]);
-    console.log("myfrom " + myfrom);
     let obj = null;
     for (let i = 0; i < unreads.length; i++) {
-      console.log(i);
-      console.log("unreads to " + unreads[i].to);
-      console.log("myto " + myto);
       if (unreads[i].to === myto && unreads[i].from === myfrom) {
         obj = unreads[i];
         break;
       }
     }
+    console.log(obj);
     return obj;
   } catch (error) {
     console.log(error.message); // catches both errors
@@ -454,9 +449,6 @@ const mutation = new GraphQLObjectType({
         from: { type: new GraphQLNonNull(GraphQLString) },
       },
       resolve(parentValue, args) {
-        // const myto = args.to;
-        // const myfrom = args.from;
-        // console.log("myto " + myto);
         grabUnreads(args)
           .then((obj) => {
             if (obj === null) {
@@ -480,34 +472,28 @@ const mutation = new GraphQLObjectType({
                 .then((res) => res.data);
             }
           })
-          .catch((err) => console.log("AYOOOOOOOOOOOO " + err.message));
-        // for (let i = 0; i < unreads.length; i++) {
-        //   if (unreads[i].to === args.to && unreads[i].from === args.from) {
-        //     index = i;
-        //     break;
-        //   }
-        // }
-        // //index = 3;
-        // if (index === -1) {
-        //   return axios
-        //     .post("http://localhost:3000/unreads", {
-        //       to: args.to,
-        //       from: args.from,
-        //       count: 1,
-        //     })
-        //     .then((res) => res.data);
-        // } else {
-        //   const id = unreads[index].id;
-        //   let count = unreads[index].count + 1;
-        //   return axios
-        //     .patch("http://localhost:3000/unreads/" + id, {
-        //       id,
-        //       to: args.to,
-        //       from: args.from,
-        //       count,
-        //     })
-        //     .then((res) => res.data);
-        // }
+          .catch((err) => console.log(err.message));
+      },
+    },
+    deleteOneUnread: {
+      type: UnreadType,
+      args: {
+        to: { type: new GraphQLNonNull(GraphQLString) },
+        from: { type: new GraphQLNonNull(GraphQLString) },
+      },
+      resolve(parentValue, args) {
+        grabUnreads(args)
+          .then((obj) => {
+            if (obj === null) {
+              return;
+            } else {
+              const id = obj.id;
+              return axios
+                .delete("http://localhost:3000/unreads/" + id)
+                .then((res) => res.data);
+            }
+          })
+          .catch((err) => console.log(err.message));
       },
     },
   },
