@@ -20,6 +20,7 @@ function DeleteButton(props) {
           delchat({
             variables: { id },
           });
+          window.alert("Message Deleted!");
         }}
       >
         <button className="btn btn-sm btn-primary deleteButton" type="submit">

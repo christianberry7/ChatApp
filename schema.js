@@ -41,7 +41,6 @@ async function grabUnreads(args) {
         break;
       }
     }
-    console.log(obj);
     return obj;
   } catch (error) {
     console.log(error.message); // catches both errors

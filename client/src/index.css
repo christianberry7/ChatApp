@@ -52,3 +52,19 @@ code {
   font-size: 60px;
   margin-top: 50px;
 }
+
+.scrollable {
+  margin: 5px;
+  padding: 5px;
+  width: 100%;
+  height: 400px;
+  overflow: auto;
+  text-align: justify;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column-reverse;
+}

@@ -23,10 +23,12 @@ function Messages(props) {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error.message} Error :(</p>;
   // console.log(data);
+  let convos = [...data.myConvos];
+  convos.reverse();
   return (
-    <React.Fragment>
-      {data.myConvos.length ? (
-        data.myConvos.map((chat) => (
+    <div className="scrollable">
+      {convos.length ? (
+        convos.map((chat) => (
           <div
             key={chat.id}
             className={
@@ -45,7 +47,7 @@ function Messages(props) {
       ) : (
         <h1 className="noMessages">Send a message!</h1>
       )}
-    </React.Fragment>
+    </div>
   );
 }
 export default Messages;
