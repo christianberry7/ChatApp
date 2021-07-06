@@ -6,7 +6,14 @@
       "email": "jbellion@email.com",
       "age": 30,
       "password": "beautifulmind1",
-      "friends": ["7", "2", "3", "4", "5", "oQx5Fw0"]
+      "friends": [
+        "7",
+        "2",
+        "3",
+        "4",
+        "5",
+        "oQx5Fw0"
+      ]
     },
     {
       "id": "2",
@@ -14,7 +21,15 @@
       "email": "jcm@email.com",
       "age": 43,
       "password": "movingOn",
-      "friends": ["1", "7", "3", "4", "5", "1oTUDmO", "oQx5Fw0"]
+      "friends": [
+        "1",
+        "7",
+        "3",
+        "4",
+        "5",
+        "1oTUDmO",
+        "oQx5Fw0"
+      ]
     },
     {
       "id": "3",
@@ -22,7 +37,13 @@
       "email": "eden@email.com",
       "age": 25,
       "password": "falling",
-      "friends": ["1", "2", "7", "4", "5"]
+      "friends": [
+        "1",
+        "2",
+        "7",
+        "4",
+        "5"
+      ]
     },
     {
       "id": "4",
@@ -30,7 +51,13 @@
       "email": "tb@email.com",
       "age": 20,
       "password": "bandito",
-      "friends": ["1", "2", "3", "7", "5"]
+      "friends": [
+        "1",
+        "2",
+        "3",
+        "7",
+        "5"
+      ]
     },
     {
       "id": "5",
@@ -38,7 +65,13 @@
       "email": "jz@email.com",
       "age": 25,
       "password": "lind",
-      "friends": ["1", "2", "3", "4", "7"]
+      "friends": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "7"
+      ]
     },
     {
       "name": "Jack Johnson",
@@ -46,7 +79,12 @@
       "age": 46,
       "id": "1oTUDmO",
       "password": "kj",
-      "friends": ["7", "2", "1", "oQx5Fw0"]
+      "friends": [
+        "7",
+        "2",
+        "1",
+        "oQx5Fw0"
+      ]
     },
     {
       "name": "Christian Berry",
@@ -54,14 +92,27 @@
       "age": 20,
       "id": "7",
       "password": "12345",
-      "friends": ["1", "2", "3", "4", "5", "1oTUDmO", "oQx5Fw0"]
+      "friends": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "1oTUDmO",
+        "oQx5Fw0"
+      ]
     },
     {
       "name": "Kent Williams",
       "email": "k2@email.com",
       "password": "pizza",
       "age": 20,
-      "friends": ["7", "2", "1", "1oTUDmO"],
+      "friends": [
+        "7",
+        "2",
+        "1",
+        "1oTUDmO"
+      ],
       "id": "oQx5Fw0"
     }
   ],
@@ -380,6 +431,55 @@
       "content": "hey bro",
       "createdAt": "07/05/2021/11:51",
       "id": 116
+    },
+    {
+      "to": "oQx5Fw0",
+      "from": "7",
+      "content": "hey, man",
+      "createdAt": "07/06/2021/10:12",
+      "id": 117
+    },
+    {
+      "to": "oQx5Fw0",
+      "from": "7",
+      "content": "hey",
+      "createdAt": "07/06/2021/10:13",
+      "id": 118
+    },
+    {
+      "to": "oQx5Fw0",
+      "from": "7",
+      "content": "hey",
+      "createdAt": "07/06/2021/10:16",
+      "id": 119
+    },
+    {
+      "to": "oQx5Fw0",
+      "from": "7",
+      "content": "yo",
+      "createdAt": "07/06/2021/10:18",
+      "id": 120
+    },
+    {
+      "to": "7",
+      "from": "oQx5Fw0",
+      "content": "what",
+      "createdAt": "07/06/2021/10:18",
+      "id": 121
+    },
+    {
+      "to": "7",
+      "from": "oQx5Fw0",
+      "content": "hey",
+      "createdAt": "07/06/2021/10:27",
+      "id": 122
+    },
+    {
+      "to": "7",
+      "from": "oQx5Fw0",
+      "content": "what",
+      "createdAt": "07/06/2021/10:27",
+      "id": 123
     }
   ],
   "requests": [
@@ -391,10 +491,28 @@
   ],
   "unreads": [
     {
-      "id": 6,
+      "id": 3,
       "to": "oQx5Fw0",
-      "from": "1oTUDmO",
+      "from": "2",
       "count": 1
+    },
+    {
+      "to": "7",
+      "from": "oQx5Fw0",
+      "count": 1,
+      "id": 5
+    },
+    {
+      "to": "7",
+      "from": "oQx5Fw0",
+      "count": 1,
+      "id": 6
+    },
+    {
+      "to": "7",
+      "from": "oQx5Fw0",
+      "count": 1,
+      "id": 7
     }
   ]
 }

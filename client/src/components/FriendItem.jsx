@@ -1,6 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { useQuery, gql } from "@apollo/client";
+import { useMutation, useQuery, gql } from "@apollo/client";
 
 const UNREAD_QUERY = gql`
   query UnreadQuery($to: String!, $from: String!) {
@@ -13,19 +12,30 @@ const UNREAD_QUERY = gql`
   }
 `;
 
+const REMOVE_UNREAD = gql`
+  mutation DeleteUnread($id: Int!) {
+    deleteUnread(id: $id) {
+      id
+    }
+  }
+`;
+
 function FriendItem({ friend: { id, email, name, age } }) {
+  const [removeunread] = useMutation(REMOVE_UNREAD);
   const myid = sessionStorage.getItem("id");
   const { loading, error, data } = useQuery(UNREAD_QUERY, {
     variables: { to: myid, from: id },
-    pollInterval: 3000,
+    pollInterval: 5000,
   });
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error.message} Error :(</p>;
   let unreads = 0;
+  let unreadIds = null;
   if (data !== null) {
     if (data.myUnreads !== null) {
       unreads = data.myUnreads.count;
+      unreadIds = data.myUnreads;
     }
   }
   return (
@@ -48,9 +58,23 @@ function FriendItem({ friend: { id, email, name, age } }) {
         )}
         <div className="col-md-3">
           <br></br>
-          <Link to={`/friends/${id}`} className="btn btn-primary">
+          <a
+            href={`/friends/${id}`}
+            className="btn btn-primary"
+            onClick={(e) => {
+              e.preventDefault();
+              if (unreadIds !== null) {
+                removeunread({
+                  variables: {
+                    id: unreadIds.id,
+                  },
+                });
+              }
+              window.location.replace(`/friends/${id}`);
+            }}
+          >
             Chat with friend!
-          </Link>
+          </a>
         </div>
       </div>
     </div>

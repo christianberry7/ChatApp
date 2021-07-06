@@ -412,12 +412,50 @@ const mutation = new GraphQLObjectType({
     deleteUnread: {
       type: UnreadType,
       args: {
-        id: { type: new GraphQLNonNull(GraphQLString) },
+        id: { type: new GraphQLNonNull(GraphQLInt) },
       },
       resolve(parentValue, args) {
         return axios
           .delete("http://localhost:3000/unreads/" + args.id)
           .then((res) => res.data);
+      },
+    },
+    addUnread: {
+      type: UnreadType,
+      args: {
+        to: { type: new GraphQLNonNull(GraphQLString) },
+        from: { type: new GraphQLNonNull(GraphQLString) },
+      },
+      resolve(parentValue, args) {
+        const lis = axios.get("http://localhost:3000/unreads");
+        let index = -1;
+        for (let i = 0; i < lis.length; i++) {
+          console.log(lis[i]);
+          if (lis[i].to === args.to && lis[i].from === args.from) {
+            index = i;
+            break;
+          }
+        }
+        if (index === -1) {
+          return axios
+            .post("http://localhost:3000/unreads", {
+              to: args.to,
+              from: args.from,
+              count: 1,
+            })
+            .then((res) => res.data);
+        } else {
+          const id = lis[i].id;
+          let count = lis[i].count + 1;
+          return axios
+            .patch("http://localhost:3000/unreads/" + id, {
+              id,
+              to: args.to,
+              from: args.from,
+              count,
+            })
+            .then((res) => res.data);
+        }
       },
     },
   },

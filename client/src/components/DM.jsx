@@ -13,14 +13,10 @@ const ADD_CHAT = gql`
   }
 `;
 
-const REMOVE_UNREAD = gql`
-  mutation RemoveUnread($id: String!, $from: String!, $content: String!) {
-    addChat(to: $to, from: $from, content: $content) {
+const ADD_UNREAD = gql`
+  mutation AddUnread($to: String!, $from: String!) {
+    addUnread(to: $to, from: $from) {
       id
-      to
-      from
-      content
-      createdAt
     }
   }
 `;
@@ -41,6 +37,7 @@ function DM(props) {
   //   variables: { a: id, b: "3" }, // later b will be me specifically
   // });
   const [addchat] = useMutation(ADD_CHAT);
+  const [addunread] = useMutation(ADD_UNREAD);
   const { loading, error, data } = useQuery(GET_REQUESTS, {
     variables: { a: sessionStorage.getItem("id"), b: id },
   });
@@ -67,7 +64,6 @@ function DM(props) {
                   content: input.value,
                 },
               });
-              //add unread message
               input.value = "";
             }}
           >
@@ -105,6 +101,13 @@ function DM(props) {
                 content: input.value,
               },
             });
+            addunread({
+              variables: {
+                to: id,
+                from: sessionStorage.getItem("id"),
+              },
+            });
+            // ADD UNREAD HERE
             input.value = "";
           }}
         >
