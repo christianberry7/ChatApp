@@ -115,6 +115,14 @@
         "5"
       ],
       "id": "oQx5Fw0"
+    },
+    {
+      "name": "James Adamson",
+      "email": "jadamson@email.com",
+      "password": "moose",
+      "age": 21,
+      "friends": [],
+      "id": "HpDW69t"
     }
   ],
   "chats": [

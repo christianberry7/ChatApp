@@ -3,17 +3,6 @@ import DM from "./DM";
 import Messages from "./Messages";
 import Name from "./Name";
 import { useMutation, gql } from "@apollo/client";
-// import DeleteUnreads from "./DeleteUnreads";
-
-// const GET_UNREADS = gql`
-//   query MyUnreads($to: String!, $from: String!) {
-//     myUnreads(to: $to, from: $from) {
-//       to
-//       from
-//       id
-//     }
-//   }
-// `;
 
 const REMOVE_ONE_UNREAD = gql`
   mutation DeleteOneUnread($to: String!, $from: String!) {
@@ -27,13 +16,6 @@ function ChatItem(props) {
   let { id } = props.match.params;
   const [removeoneunread] = useMutation(REMOVE_ONE_UNREAD);
 
-  // const { loading, error, data } = useQuery(GET_UNREADS, {
-  //   variables: { to: sessionStorage.getItem("id"), from: id },
-  // });
-  // //delete unread messages right at the beginning
-  // if (loading) return <p>Loading...</p>;
-  // if (error) return <p>{error.message} Error :(</p>;
-  // console.log(data); //we got our unreads, now let's delete them if they have the id of the other person
   return (
     <React.Fragment>
       {sessionStorage.getItem("friends").includes(id) ? (

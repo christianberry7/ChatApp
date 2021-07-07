@@ -1,7 +1,6 @@
 import React from "react";
 import { useQuery, gql } from "@apollo/client";
 import FriendItem from "./FriendItem";
-import { Link } from "react-router-dom";
 const FRIENDS_QUERY = gql`
   query CustomersQuery {
     customers {
@@ -31,9 +30,9 @@ function Friends() {
   return (
     <React.Fragment>
       <h2 className="mb-5 mt-5">Hi, {myname}!</h2>
-      <Link to={`/friends/add`} className="btn btn-info">
+      <a href="/friends/add" className="btn btn-info">
         Add Friends!
-      </Link>
+      </a>
       <h2 className="mb-5 mt-5">Friends:</h2>
       <hr></hr>
       {data.customers.map((friend) =>
