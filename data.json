@@ -144,9 +144,21 @@
       "age": 24,
       "friends": [
         "",
-        "7"
+        "7",
+        "n0VQ5K2"
       ],
       "id": "QgePm8g"
+    },
+    {
+      "name": "Steph Curry",
+      "email": "sc30@email.com",
+      "password": "splash",
+      "age": 34,
+      "friends": [
+        "",
+        "QgePm8g"
+      ],
+      "id": "n0VQ5K2"
     }
   ],
   "chats": [
@@ -772,6 +784,69 @@
       "content": "hi",
       "createdAt": "07/07/2021/12:02",
       "id": 187
+    },
+    {
+      "to": "n0VQ5K2",
+      "from": "QgePm8g",
+      "content": "hi",
+      "createdAt": "07/07/2021/16:01",
+      "id": 188
+    },
+    {
+      "to": "n0VQ5K2",
+      "from": "QgePm8g",
+      "content": "great game bro",
+      "createdAt": "07/07/2021/16:01",
+      "id": 189
+    },
+    {
+      "to": "QgePm8g",
+      "from": "n0VQ5K2",
+      "content": "thanks dogg",
+      "createdAt": "07/07/2021/16:01",
+      "id": 190
+    },
+    {
+      "to": "QgePm8g",
+      "from": "n0VQ5K2",
+      "content": "means a lot coming from you",
+      "createdAt": "07/07/2021/16:01",
+      "id": 191
+    },
+    {
+      "to": "n0VQ5K2",
+      "from": "QgePm8g",
+      "content": "real recognize real",
+      "createdAt": "07/07/2021/16:02",
+      "id": 192
+    },
+    {
+      "to": "QgePm8g",
+      "from": "n0VQ5K2",
+      "content": "true true",
+      "createdAt": "07/07/2021/16:04",
+      "id": 193
+    },
+    {
+      "to": "QgePm8g",
+      "from": "n0VQ5K2",
+      "content": "but look at you man",
+      "createdAt": "07/07/2021/16:04",
+      "id": 194
+    },
+    {
+      "to": "QgePm8g",
+      "from": "n0VQ5K2",
+      "content": "keep doin big things",
+      "createdAt": "07/07/2021/16:05",
+      "id": 195
+    },
+    {
+      "to": "QgePm8g",
+      "from": "n0VQ5K2",
+      "content": "GL in the finals",
+      "createdAt": "07/07/2021/16:34",
+      "id": 196
     }
   ],
   "requests": [
@@ -810,6 +885,12 @@
       "from": "7",
       "count": 1,
       "id": 7
+    },
+    {
+      "to": "QgePm8g",
+      "from": "n0VQ5K2",
+      "count": 4,
+      "id": 10
     }
   ]
 }

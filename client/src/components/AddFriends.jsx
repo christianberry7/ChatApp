@@ -29,7 +29,10 @@ function AddFriends() {
   sessionStorage.setItem("friends", myfriends);
   return (
     <React.Fragment>
-      <h2 className="mb-5 mt-5">Hi, {myname}! Add Friends Here!</h2>
+      <h2 className="mb-3 mt-5">Hi, {myname}! Add Friends Here!</h2>
+      <a href="/friends" className="btn btn-dark mb-4">
+        Back
+      </a>
       {data.customers.map((friend) =>
         friend.id !== myid ? (
           !myfriends.includes(friend.id) ? (

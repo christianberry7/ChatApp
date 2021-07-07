@@ -23,7 +23,7 @@ function Friends() {
   let myfriends = [];
   for (let i = 0; i < data.customers.length; i++) {
     if (data.customers[i].id === myid) {
-      myfriends = data.customers[i].friends;
+      myfriends = data.customers[i].friends; // grabbing my friends list
     }
   }
   sessionStorage.setItem("friends", myfriends);

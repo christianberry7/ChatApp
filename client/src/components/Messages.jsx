@@ -26,7 +26,7 @@ function Messages(props) {
   let convos = [...data.myConvos];
   convos.reverse();
   return (
-    <div className="scrollable">
+    <div className={convos.length ? "scrollable" : ""}>
       {convos.length ? (
         convos.map((chat) => (
           <div
