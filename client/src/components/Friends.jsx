@@ -46,6 +46,7 @@ function Friends() {
           <div key={friend.id} />
         )
       )}
+      <br />
     </React.Fragment>
   );
 }

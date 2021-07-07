@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useQuery, gql } from "@apollo/client";
+import swal from "sweetalert";
 
 const LOGIN_QUERY = gql`
   query CustomersQuery {
@@ -34,7 +35,7 @@ export default function Login({ setToken }) {
   function validate(data, { username, password }) {
     for (let i = 0; i < data.customers.length; i++) {
       if (
-        data.customers[i].email === username &&
+        data.customers[i].email.toLowerCase() === username.toLowerCase() &&
         data.customers[i].password === password
       ) {
         return i;
@@ -59,7 +60,14 @@ export default function Login({ setToken }) {
       sessionStorage.setItem("friends", friends);
       setToken(token);
     } else {
-      window.alert("Invalid login credentials!");
+      swal({
+        title: "Invalid Login Credentials!",
+        text: "Please try logging in again.",
+      }).then(() => {
+        document.getElementById("pass").value = "";
+        document.getElementById("pass").focus();
+        document.getElementById("pass").select();
+      });
     }
   };
 
@@ -74,7 +82,7 @@ export default function Login({ setToken }) {
           <p>Email</p>
           <input
             type="text"
-            autoComplete="current-password"
+            autoComplete="email"
             onChange={(e) => setUserName(e.target.value)}
           />
         </label>
@@ -82,6 +90,7 @@ export default function Login({ setToken }) {
           <p>Password</p>
           <input
             type="password"
+            id="pass"
             autoComplete="current-password"
             onChange={(e) => setPassword(e.target.value)}
           />

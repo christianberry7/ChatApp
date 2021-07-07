@@ -68,3 +68,12 @@ code {
   display: flex;
   flex-direction: column-reverse;
 }
+
+.btn-circle.btn-sm {
+  width: 38px;
+  height: 38px;
+  padding: 4px 0px;
+  border-radius: 15px;
+  font-size: 8px;
+  text-align: center;
+}

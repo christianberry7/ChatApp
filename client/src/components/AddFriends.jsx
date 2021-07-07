@@ -46,6 +46,8 @@ function AddFriends() {
       <a href="/friends" className="btn btn-secondary">
         Back
       </a>
+      <br />
+      <br />
     </React.Fragment>
   );
 }

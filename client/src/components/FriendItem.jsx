@@ -51,7 +51,10 @@ function FriendItem({ friend: { id, email, name, age } }) {
         ) : (
           <div className="col-md-3">
             <br></br>
-            <span className="btn btn-danger" style={{ pointerEvents: "none" }}>
+            <span
+              className="btn btn-danger btn-circle btn-sm"
+              style={{ pointerEvents: "none" }}
+            >
               <h3 style={{ color: "white" }}>{unreads}</h3>
             </span>
           </div>

@@ -1,5 +1,7 @@
 import React from "react";
 import { useMutation, gql } from "@apollo/client";
+import { Link } from "react-router-dom";
+import swal from "sweetalert";
 
 const ADD_CUSTOMER = gql`
   mutation AddCustomer(
@@ -42,10 +44,12 @@ function Account() {
               age,
             },
           });
-          window.alert(
-            "Account Created! Welcome, " + document.getElementById("fn").value
-          );
-          window.location.replace("/login");
+          swal({
+            title: "Account Created!",
+            text: `Welcome, ${document.getElementById("fn").value}!`,
+          }).then((made) => {
+            window.location.replace("/login");
+          });
         }}
       >
         <div className="mb-4">
@@ -100,7 +104,7 @@ function Account() {
         <div className="form-group">
           <div className="form-check">
             <input
-              className="form-check-input is-invalid"
+              className="form-check-input"
               type="checkbox"
               id="check"
               required
@@ -110,9 +114,13 @@ function Account() {
             </label>
           </div>
         </div>
+        <br></br>
         <button className="btn btn-primary" type="submit">
           Create Account
         </button>
+        <Link to="/login" className="btn btn-secondary">
+          <span style={{ fontSize: "20px" }}>←</span> Back to login
+        </Link>
       </form>
     </div>
   );

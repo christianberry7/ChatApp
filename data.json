@@ -99,7 +99,9 @@
         "4",
         "5",
         "1oTUDmO",
-        "oQx5Fw0"
+        "oQx5Fw0",
+        "HpDW69t",
+        "QgePm8g"
       ]
     },
     {
@@ -121,8 +123,30 @@
       "email": "jadamson@email.com",
       "password": "moose",
       "age": 21,
-      "friends": [],
+      "friends": [
+        "",
+        "7"
+      ],
       "id": "HpDW69t"
+    },
+    {
+      "name": "Matine Rubin",
+      "email": "mr@email.com",
+      "password": "sadie",
+      "age": 20,
+      "friends": [],
+      "id": "jmygruL"
+    },
+    {
+      "name": "Devin Booker",
+      "email": "dbook@email.com",
+      "password": "Wet",
+      "age": 24,
+      "friends": [
+        "",
+        "7"
+      ],
+      "id": "QgePm8g"
     }
   ],
   "chats": [
@@ -685,6 +709,69 @@
       "content": "that's insane",
       "createdAt": "07/06/2021/16:25",
       "id": 164
+    },
+    {
+      "to": "7",
+      "from": "oQx5Fw0",
+      "content": "wassup",
+      "createdAt": "07/07/2021/11:40",
+      "id": 165
+    },
+    {
+      "to": "7",
+      "from": "oQx5Fw0",
+      "content": "bro",
+      "createdAt": "07/07/2021/11:40",
+      "id": 166
+    },
+    {
+      "to": "7",
+      "from": "oQx5Fw0",
+      "content": "what",
+      "createdAt": "07/07/2021/11:40",
+      "id": 167
+    },
+    {
+      "to": "7",
+      "from": "oQx5Fw0",
+      "content": "there we go",
+      "createdAt": "07/07/2021/11:40",
+      "id": 168
+    },
+    {
+      "to": "oQx5Fw0",
+      "from": "7",
+      "content": "yea it works",
+      "createdAt": "07/07/2021/11:43",
+      "id": 180
+    },
+    {
+      "to": "7",
+      "from": "HpDW69t",
+      "content": "hey cb",
+      "createdAt": "07/07/2021/11:50",
+      "id": 181
+    },
+    {
+      "to": "HpDW69t",
+      "from": "7",
+      "content": "hey james",
+      "createdAt": "07/07/2021/11:50",
+      "id": 182
+    },
+    {
+      "to": "7",
+      "from": "oQx5Fw0",
+      "content": "yezzir",
+      "createdAt": "07/07/2021/11:52",
+      "id": 186
+    },
+    {
+      "to": "HpDW69t",
+      "from": "7",
+      "content": "hi",
+      "createdAt": "07/07/2021/12:02",
+      "id": 187
     }
   ],
   "requests": [
@@ -707,16 +794,22 @@
       "id": 1
     },
     {
-      "to": "7",
-      "from": "4",
-      "count": 2,
-      "id": 3
-    },
-    {
       "to": "5",
       "from": "7",
       "count": 1,
       "id": 4
+    },
+    {
+      "to": "7",
+      "from": "oQx5Fw0",
+      "count": 1,
+      "id": 6
+    },
+    {
+      "to": "HpDW69t",
+      "from": "7",
+      "count": 1,
+      "id": 7
     }
   ]
 }

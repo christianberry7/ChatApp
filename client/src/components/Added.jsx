@@ -1,5 +1,6 @@
 import React from "react";
 import { useMutation, gql } from "@apollo/client";
+import swal from "sweetalert";
 
 const ADD_FRIEND = gql`
   mutation AddFriendship($id: String!, $friends: [String]!) {
@@ -65,7 +66,12 @@ function Added(props) {
                 from: myid,
               },
             });
-            window.alert("Request sent!");
+            swal({
+              title: "Friend Request Sent!",
+              text: "Your friend must add you back before you can message them!",
+            }).then((accept) => {
+              window.location.replace("/friends/add");
+            });
           } else {
             console.log("deleting request with id of " + option);
             deleterequest({
@@ -73,9 +79,13 @@ function Added(props) {
                 id: parseInt(option),
               },
             });
-            window.alert("Request Accepted!");
+            swal({
+              title: "Friend Request Accepted!",
+              text: "Go say hi to your new friend!",
+            }).then((accept) => {
+              window.location.replace("/friends/add");
+            });
           }
-          window.location.replace("/friends/add");
         }}
       >
         {option === "addNew" ? (

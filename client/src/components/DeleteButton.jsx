@@ -1,5 +1,6 @@
 import React from "react";
 import { useMutation, gql } from "@apollo/client";
+import swal from "sweetalert";
 
 const DEL_CHAT = gql`
   mutation DeleteChat($id: String!) {
@@ -20,7 +21,8 @@ function DeleteButton(props) {
           delchat({
             variables: { id },
           });
-          window.alert("Message Deleted!");
+          //window.alert("Message Deleted!");
+          swal({ title: "Message Deleted!" }).then((deleted) => {});
         }}
       >
         <button className="btn btn-sm btn-primary deleteButton" type="submit">

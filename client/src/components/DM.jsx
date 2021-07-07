@@ -33,9 +33,7 @@ const GET_REQUESTS = gql`
 
 function DM(props) {
   let { id } = props.match.params;
-  // const { loading, error, data } = useQuery(FRIEND_QUERY, {
-  //   variables: { a: id, b: "3" }, // later b will be me specifically
-  // });
+
   const [addchat] = useMutation(ADD_CHAT);
   const [addunread] = useMutation(ADD_UNREAD);
   const { loading, error, data } = useQuery(GET_REQUESTS, {
