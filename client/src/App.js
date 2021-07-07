@@ -8,6 +8,7 @@ import Login from "./components/Login";
 import useToken from "./components/useToken";
 import AddFriends from "./components/AddFriends";
 import Added from "./components/Added";
+import Account from "./components/Account";
 
 const client = new ApolloClient({
   uri: "http://localhost:4000/graphql",
@@ -30,7 +31,17 @@ function App() {
   if (!token) {
     return (
       <ApolloProvider client={client}>
-        <Login setToken={setToken} />
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/account" component={Account} />
+            <Route
+              exact
+              path="/login"
+              component={() => <Login setToken={setToken} />}
+            />
+            <Redirect to="/login"></Redirect>
+          </Switch>
+        </BrowserRouter>
       </ApolloProvider>
     );
   }

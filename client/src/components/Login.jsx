@@ -90,6 +90,10 @@ export default function Login({ setToken }) {
           <button className="btn btn-secondary" type="submit">
             Submit
           </button>
+          <hr />
+          <a className="btn btn-primary" href="/account">
+            Create Account
+          </a>
         </div>
       </form>
     </div>
