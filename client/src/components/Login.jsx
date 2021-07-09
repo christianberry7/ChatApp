@@ -34,6 +34,9 @@ export default function Login({ setToken }) {
 
   function validate(data, { username, password }) {
     for (let i = 0; i < data.customers.length; i++) {
+      if (typeof username === "undefined") {
+        return -1;
+      }
       if (
         data.customers[i].email.toLowerCase() === username.toLowerCase() &&
         data.customers[i].password === password

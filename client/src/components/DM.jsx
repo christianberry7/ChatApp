@@ -80,9 +80,6 @@ function DM(props) {
       </React.Fragment>
     );
   }
-  // if (loading) return <p>Loading...</p>;
-  // if (error) return <p>{error.message} Error :(</p>;
-  // console.log(data);
   return (
     <React.Fragment>
       <div>

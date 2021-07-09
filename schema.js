@@ -297,6 +297,17 @@ const RootQuery = new GraphQLObjectType({
           );
       },
     },
+    myUnreadList: {
+      type: new GraphQLList(UnreadType),
+      args: {
+        to: { type: GraphQLString },
+      },
+      resolve(parentValue, args) {
+        return axios
+          .get("http://localhost:3000/unreads")
+          .then((res) => res.data.filter((unread) => unread.to === args.to));
+      },
+    },
   },
 });
 
@@ -463,7 +474,6 @@ const mutation = new GraphQLObjectType({
               let count = obj.count + 1;
               return axios
                 .patch("http://localhost:3000/unreads/" + id, {
-                  id,
                   to: args.to,
                   from: args.from,
                   count,
