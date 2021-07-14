@@ -117,6 +117,12 @@ function DM(props) {
                 from: sessionStorage.getItem("id"),
               },
             });
+            changefriendship({
+              variables: {
+                to: sessionStorage.getItem("id"),
+                from: id,
+              },
+            });
             input.value = "";
           }}
         >

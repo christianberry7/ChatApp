@@ -62,6 +62,7 @@ export default function Login({ setToken }) {
       sessionStorage.setItem("name", name);
       sessionStorage.setItem("friends", friends);
       setToken(token);
+      window.location.replace("/friends");
     } else {
       swal({
         title: "Invalid Login Credentials!",

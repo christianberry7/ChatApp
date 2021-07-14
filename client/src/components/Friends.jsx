@@ -1,5 +1,5 @@
 import React from "react";
-import { useMutation, useQuery, gql } from "@apollo/client";
+import { useQuery, gql } from "@apollo/client";
 import FriendItem from "./FriendItem";
 
 // we have to grab more than just the friends because we display the friends' names and emails etc.
@@ -15,17 +15,9 @@ const FRIENDS_QUERY = gql`
   }
 `;
 
-const REORDER_FRIENDS = gql`
-  mutation AddFriendship($id: String!, $friends: [String]!) {
-    addFriendship(id: $id, friends: $friends) {
-      id
-    }
-  }
-`;
-
 function Friends() {
   function getFriends(customers, friends) {
-    console.log("get friends in Friends");
+    //console.log("get friends in Friends");
     const orderedFriends = [];
     for (let i = 0; i < friends.length; i++) {
       for (let j = 0; j < customers.length; j++) {
@@ -41,7 +33,6 @@ function Friends() {
   const myid = sessionStorage.getItem("id");
   const myname = sessionStorage.getItem("name");
   sessionStorage.setItem("unreads", new Set());
-  const [reorderfriends] = useMutation(REORDER_FRIENDS);
 
   const { loading, error, data } = useQuery(FRIENDS_QUERY, {
     pollInterval: 2000,
@@ -70,14 +61,7 @@ function Friends() {
       <hr></hr>
       {orderedFriends.map((friend) =>
         friend.id !== myid ? (
-          <FriendItem
-            key={friend.id}
-            friend={friend}
-            reorderfriends={reorderfriends}
-            friends={myfriends}
-            customers={data.customers}
-            index={orderedFriends.indexOf(friend)}
-          />
+          <FriendItem key={friend.id} friend={friend} />
         ) : (
           <div key={friend.id} />
         )
