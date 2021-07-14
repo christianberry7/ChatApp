@@ -21,6 +21,14 @@ const ADD_UNREAD = gql`
   }
 `;
 
+const CHANGE_FRIENDSHIP = gql`
+  mutation ChangeFriendship($to: String!, $from: String!) {
+    changeFriendship(to: $to, from: $from) {
+      id
+    }
+  }
+`;
+
 const GET_REQUESTS = gql`
   query OurRequests($a: String!, $b: String!) {
     ourRequests(a: $a, b: $b) {
@@ -36,6 +44,7 @@ function DM(props) {
 
   const [addchat] = useMutation(ADD_CHAT);
   const [addunread] = useMutation(ADD_UNREAD);
+  const [changefriendship] = useMutation(CHANGE_FRIENDSHIP);
   const { loading, error, data } = useQuery(GET_REQUESTS, {
     variables: { a: sessionStorage.getItem("id"), b: id },
   });
@@ -102,7 +111,12 @@ function DM(props) {
                 from: sessionStorage.getItem("id"),
               },
             });
-            // ADD UNREAD HERE
+            changefriendship({
+              variables: {
+                to: id,
+                from: sessionStorage.getItem("id"),
+              },
+            });
             input.value = "";
           }}
         >

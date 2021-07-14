@@ -47,6 +47,24 @@ async function grabUnreads(args) {
   }
 }
 
+async function grabFriends(args) {
+  try {
+    // fetch data from a url endpoint
+    const myto = args.to;
+    const myfrom = args.from;
+    const response = await axios.get("http://localhost:3000/customers/" + myto);
+    //return response;
+    let friendsList = response.data.friends;
+    const new_friends = [...friendsList];
+    const friendIndex = friendsList.indexOf(myfrom);
+    new_friends.unshift(new_friends.splice(friendIndex, 1)[0]);
+
+    return new_friends;
+  } catch (error) {
+    console.log(error.message); // catches both errors
+  }
+}
+
 function getList(chats) {
   chats = chats.split("/");
   const times = chats[3].split(":");
@@ -386,6 +404,33 @@ const mutation = new GraphQLObjectType({
             friends: args.friends,
           })
           .then((res) => res.data);
+      },
+    },
+    changeFriendship: {
+      type: CustomerType,
+      args: {
+        to: { type: new GraphQLNonNull(GraphQLString) },
+        from: { type: new GraphQLNonNull(GraphQLString) },
+      },
+      resolve(parentValue, args) {
+        grabFriends(args)
+          .then((obj) => {
+            // const id = obj.id;
+            // let count = obj.count + 1;
+            console.log(obj);
+            return axios
+              .patch("http://localhost:3000/customers/" + args.to, {
+                friends: obj,
+              })
+              .then((res) => res.data);
+          })
+          .catch((err) => console.log(err.message));
+
+        // return axios
+        //   .patch("http://localhost:3000/customers/" + args.id, {
+        //     friends: args.friends,
+        //   })
+        //   .then((res) => res.data);
       },
     },
     addChat: {

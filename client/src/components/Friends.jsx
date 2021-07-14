@@ -1,6 +1,8 @@
 import React from "react";
 import { useMutation, useQuery, gql } from "@apollo/client";
 import FriendItem from "./FriendItem";
+
+// we have to grab more than just the friends because we display the friends' names and emails etc.
 const FRIENDS_QUERY = gql`
   query CustomersQuery {
     customers {
@@ -41,7 +43,9 @@ function Friends() {
   sessionStorage.setItem("unreads", new Set());
   const [reorderfriends] = useMutation(REORDER_FRIENDS);
 
-  const { loading, error, data } = useQuery(FRIENDS_QUERY);
+  const { loading, error, data } = useQuery(FRIENDS_QUERY, {
+    pollInterval: 2000,
+  });
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error.message} Error :(</p>;

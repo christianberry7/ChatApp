@@ -19,16 +19,16 @@ const REMOVE_UNREAD = gql`
   }
 `;
 
-var arraysMatch = function (arr1, arr2) {
-  // don't need to check length
-  // Check if all items exist and are in the same order
-  for (var i = 0; i < arr1.length; i++) {
-    if (arr1[i] !== arr2[i]) return false;
-  }
+// var arraysMatch = function (arr1, arr2) {
+//   // don't need to check length
+//   // Check if all items exist and are in the same order
+//   for (var i = 0; i < arr1.length; i++) {
+//     if (arr1[i] !== arr2[i]) return false;
+//   }
 
-  // Otherwise, return true
-  return true;
-};
+//   // Otherwise, return true
+//   return true;
+// };
 
 // function getFriends(customers, friends) {
 //   // console.log("get friends");
@@ -45,30 +45,30 @@ var arraysMatch = function (arr1, arr2) {
 //   return orderedFriends;
 // }
 
-async function changeOrder(id, friends, index, reorderfriends) {
-  // console.log("Notifs changed so changning the order");
-  const myid = sessionStorage.getItem("id");
-  //const myfriends = sessionStorage.getItem("friends").split(",");
-  const new_friends = [...friends];
-  const friendIndex = friends.indexOf(id);
-  // console.log(friendIndex);
-  new_friends.unshift(new_friends.splice(friendIndex, 1)[0]);
-  // console.log(myfriends);
-  // console.log("old friends");
-  // console.log(sessionStorage.getItem("friends"));
-  // console.log("new friends");
-  // console.log(new_friends);
-  if (!arraysMatch(sessionStorage.getItem("friends").split(","), new_friends))
-    sessionStorage.setItem("friends", new_friends);
-  reorderfriends({
-    variables: {
-      id: myid,
-      friends: new_friends,
-    },
-  })
-    // .then((res) => console.log(getFriends(customers, new_friends)))
-    .catch((err) => console.log(err.message));
-}
+// async function changeOrder(id, friends, index, reorderfriends) {
+//   // console.log("Notifs changed so changning the order");
+//   const myid = sessionStorage.getItem("id");
+//   //const myfriends = sessionStorage.getItem("friends").split(",");
+//   const new_friends = [...friends];
+//   const friendIndex = friends.indexOf(id);
+//   // console.log(friendIndex);
+//   new_friends.unshift(new_friends.splice(friendIndex, 1)[0]);
+//   // console.log(myfriends);
+//   // console.log("old friends");
+//   // console.log(sessionStorage.getItem("friends"));
+//   // console.log("new friends");
+//   // console.log(new_friends);
+//   if (!arraysMatch(sessionStorage.getItem("friends").split(","), new_friends))
+//     sessionStorage.setItem("friends", new_friends);
+//   reorderfriends({
+//     variables: {
+//       id: myid,
+//       friends: new_friends,
+//     },
+//   })
+//     // .then((res) => console.log(getFriends(customers, new_friends)))
+//     .catch((err) => console.log(err.message));
+// }
 
 function FriendItem({
   friend: { id, email, name, age },
@@ -81,7 +81,7 @@ function FriendItem({
   const myid = sessionStorage.getItem("id");
   const { loading, error, data } = useQuery(UNREAD_QUERY, {
     variables: { to: myid, from: id },
-    pollInterval: 5000,
+    pollInterval: 2000,
   });
 
   if (loading) return <p>Loading...</p>;
@@ -111,17 +111,18 @@ function FriendItem({
     //console.log(unreadPositions);
     //console.log(unreads);
     //if(id)
-    console.log(unreadPositions);
-    console.log(index);
-    console.log(id);
-    for (let i = 0; i < unreadPositions.length; i++) {
-      if (unreadPositions[i] === id && i !== index) {
-        console.log(`we should move ${id} to position ${i}`);
-        changeOrder(id, friends, customers, reorderfriends)
-          .then((res) => console.log("res " + res))
-          .catch((err) => console.log(err.message));
-      }
-    }
+    // THIS IS THE PRINT OUT OF POSITION
+    // console.log(unreadPositions);
+    // console.log(index);
+    // console.log(id);
+    // for (let i = 0; i < unreadPositions.length; i++) {
+    //   if (unreadPositions[i] === id && i !== index) {
+    //     console.log(`we should move ${id} to position ${i}`);
+    //     changeOrder(id, friends, customers, reorderfriends)
+    //       .then((res) => console.log("res " + res))
+    //       .catch((err) => console.log(err.message));
+    //   }
+    // }
     //console.log(index);
 
     // //console.log(unreadIds.from);
