@@ -26,7 +26,6 @@ function AddFriends() {
       myfriends = data.customers[i].friends;
     }
   }
-  //sessionStorage.setItem("friends", myfriends);
   return (
     <React.Fragment>
       <h2 className="mb-3 mt-5">Hi, {myname}! Add Friends Here!</h2>

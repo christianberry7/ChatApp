@@ -42,7 +42,6 @@ function FriendItem({ friend: { id, email, name, age } }) {
   }
   let unreadId = null;
   let unreads = 0;
-  //console.log(data.myUnreadList);
   if (data.myUnreadList.length !== 0) {
     const { myUnreadList } = data;
     const unreadPositions = [];

@@ -21,7 +21,6 @@ function DeleteButton(props) {
           delchat({
             variables: { id },
           });
-          //window.alert("Message Deleted!");
           swal({ title: "Message Deleted!" }).then((deleted) => {});
         }}
       >

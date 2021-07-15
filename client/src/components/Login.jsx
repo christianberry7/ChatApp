@@ -81,7 +81,6 @@ export default function Login({ setToken }) {
       <br></br>
       <br></br>
       <form onSubmit={handleSubmit}>
-        {/* handle submit ^ */}
         <label>
           <p>Email</p>
           <input

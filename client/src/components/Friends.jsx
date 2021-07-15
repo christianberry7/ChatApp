@@ -17,7 +17,6 @@ const FRIENDS_QUERY = gql`
 
 function Friends() {
   function getFriends(customers, friends) {
-    //console.log("get friends in Friends");
     const orderedFriends = [];
     for (let i = 0; i < friends.length; i++) {
       for (let j = 0; j < customers.length; j++) {
@@ -27,7 +26,6 @@ function Friends() {
         }
       }
     }
-    //setFriends(orderedFriends);
     return orderedFriends;
   }
   const myid = sessionStorage.getItem("id");

@@ -13,6 +13,7 @@ const FRIEND_QUERY = gql`
     }
   }
 `;
+
 function Messages(props) {
   let { id } = props.match.params;
   const myid = sessionStorage.getItem("id");
@@ -50,4 +51,5 @@ function Messages(props) {
     </div>
   );
 }
+
 export default Messages;

@@ -425,12 +425,6 @@ const mutation = new GraphQLObjectType({
               .then((res) => res.data);
           })
           .catch((err) => console.log(err.message));
-
-        // return axios
-        //   .patch("http://localhost:3000/customers/" + args.id, {
-        //     friends: args.friends,
-        //   })
-        //   .then((res) => res.data);
       },
     },
     addChat: {
